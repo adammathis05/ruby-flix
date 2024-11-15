@@ -1,0 +1,14 @@
+<h1><%= @movie.title %> (<%= @movie.rating %>)</h1>
+<h3>
+    Total Gross: <%= total_gross(@movie) %>
+</h3>
+<p>
+    <%= @movie.description %>
+</p>
+<p>
+    Released in: <%= year_of(@movie) %>
+</p>
+
+<section class="admin">
+  <%= link_to "Edit", edit_movie_path(@movie), class: "button" %>
+</section>
