@@ -1,5 +1,7 @@
 class Movie < ApplicationRecord
 
+  has_many :reviews, dependent: :destroy
+
   validates :title, :duration, :released_on, presence: true
 
   validates :description, length: { minimum: 25 }
