@@ -20,6 +20,26 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+    @review = @movie.review
+  end
+
+  def update
+    @review = @movie.review
+    if @review.update(review_params)
+      redirect_to movie_reviews_path(@movie),
+        notice: "Your review has been successfully updated!"
+    else 
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @review.destroy
+    redirect_to movies_url, status: :see_other,
+      alert: "Review successfully deleted!"
+  end
+
 end
 
 private 
