@@ -1,0 +1,10 @@
+<h1>Reviews for <%= link_to @movie.title, @movie %></h1>
+
+<ul class="reviews">
+    <% @reviews.each do |review| %>
+        <li>
+            <%= pluralize(review.stars, 'star')%> from <%= review.name %>: <strong>"<%= review.comment %>"</strong>
+            (Added <%= time_ago_in_words(review.created_at) %> ago.)
+        </li>
+    <% end %>
+</ul>

@@ -2,22 +2,22 @@
     <div class = "image">
         <%= image_tag @movie.image_file_name %>
     </div>
-    <h1><%= @movie.title %> (<%= @movie.rating %>)</h1>
-    <h3>
+    <h1><%= @movie.title %></h1>
+    <h2>
+    <%= year_of(@movie) %> &bull; <%= @movie.rating %>
+  </h2>
+  <h3>
         Total Gross: <%= total_gross(@movie) %>
     </h3>
-    <p>
-        <%= @movie.description %>
-    </p>
-    <p>
-        Released in: <%= year_of(@movie) %>
-    </p>
-    <p>
-        Duration: <%= @movie.duration %>
-    </p>
-    <p>
-        Directed by <%= @movie.director %>
-    </p>
+  <p>
+    <%= @movie.description %>
+  </p>
+  <div class="reviews">
+    <strong><%= link_to pluralize(@movie.reviews.size, "review"), movie_reviews_path(@movie) %></strong>
+  </div>
+  <table>
+    ...
+  </table>
 </section>
 
 <section class="admin">
