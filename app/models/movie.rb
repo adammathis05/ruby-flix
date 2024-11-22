@@ -17,7 +17,9 @@ class Movie < ApplicationRecord
   validates :rating, inclusion: { in: RATINGS }
 
   def flop?
-    total_gross.blank? || total_gross <= 2_000_000
+    unless (reviews.count > 50 && average_stars >= 4)
+      (total_gross <= 250_000_000)
+    end
   end
 
   def self.released 
