@@ -1,8 +1,11 @@
 <section class="user">
   <h1><%= @user.name %></h1>
+  <% if current_user_admin? %>
+    <h2><strong>Admin</strong></h2>
+  <% end %>  
   <h2>Username: <%= @user.username %></h2>
   <h2>Email Address: <%= mail_to(@user.email) %></h2>
-  
+
   <p>Member since <%= @user.created_at.strftime("%B %Y") %></p>
   <% if current_user?(@user) %>
     <div class="actions">
