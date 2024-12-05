@@ -14,4 +14,26 @@
               data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
     </div>
   <% end %>
+  <% if @reviews.present? %>
+    <h3>Reviews</h3>
+    <% @reviews.each do |review| %>
+      <div class="review">
+        <div class = "image">
+          <%= link_to image_tag(review.movie.image_file_name), review.movie %>
+        </div>
+        <div class="details">
+          <span class="title">
+            <%= link_to review.movie.title, review.movie %>
+          </span>
+          <%= render "shared/stars", percent: review.stars_as_percent %>
+          <span class="date">
+            <%= time_ago_in_words(review.created_at) %> ago
+          </span>
+          <p>
+            <%= review.comment %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </section>

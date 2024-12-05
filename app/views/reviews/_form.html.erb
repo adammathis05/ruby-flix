@@ -2,9 +2,6 @@
 
     <%= render "shared/errors", object: @review %>
 
-    <%= f.label :name, autofocus: true %>
-    <%= f.text_field :name %>
-
     <div class="legend">Stars</div>
         <% Review::STARS.each do |star| %>
             <span class="star">
