@@ -14,13 +14,18 @@
               data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
     </div>
   <% end %>
+  <% if @favorite_movies.present? %>
+    <h3>Favorite Movies</h3>
+    <div class="favorite-movies">
+      <% @favorite_movies.each do |movie| %>
+        <%= link_to image_tag(movie.image_file_name), movie %>
+      <% end %>
+    </div>
+  <% end %>
   <% if @reviews.present? %>
     <h3>Reviews</h3>
     <% @reviews.each do |review| %>
       <div class="review">
-        <div class = "image">
-          <%= link_to image_tag(review.movie.image_file_name), review.movie %>
-        </div>
         <div class="details">
           <span class="title">
             <%= link_to review.movie.title, review.movie %>
