@@ -20,15 +20,19 @@ class Movie < ApplicationRecord
   RATINGS = %w(G PG PG-13 R NC-17)
   validates :rating, inclusion: { in: RATINGS }
 
-  def flop?
-    unless (reviews.count > 50 && average_stars >= 4)
-      (total_gross <= 250_000_000)
-    end
-  end
+  scope :released, -> { where("released_on < ?", Time.now).order(released_on: :desc) }
+  scope :upcoming, -> { where("released_on > ?", Time.now).order(released_on: :asc) }
+  scope :recent, ->(max=5) { released.limit(max) }
+  scope :flops, -> { released.where("total_gross < 225000000").order(total_gross: :asc) }  
+  scope :hits, -> { released.where("total_gross >= 300000000").order(total_gross: :desc) }
 
-  def self.released 
-    where("released_on < ?", Time.now).order(released_on: :desc)
-  end
+
+  # def flop?
+  #   unless (reviews.count > 50 && average_stars >= 4)
+  #     (total_gross <= 250_000_000)
+  #   end
+  # end
+
 
   def average_stars
     reviews.average(:stars) || 0.0
